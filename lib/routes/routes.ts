@@ -1,53 +1,28 @@
-import {Request, Response} from "express";
+import {ProfesorController} from "../resources/profesor/profesor.controller";
+import {CursoController} from "../resources/curso/curso.controller";
+
+let profesorController: ProfesorController = new ProfesorController();
+let cursoController: CursoController = new CursoController();
 
 export class Routes {
+  // TODO: separar los routes en archivos distintos para modularizar
 
   public routes(app): void {
 
-    app.route('/')
-        .get((req: Request, res: Response) => {
-          res.status(200).send({
-            message: 'GET request successfulll!!!!'
-          })
-        })
+    app.route('/profesor').get(profesorController.getAllProfesors)
+        .post(profesorController.createProfesor);
 
-    // Contact
-    app.route('/contact')
-    // GET endpoint
-        .get((req: Request, res: Response) => {
-          // Get all contacts
-          res.status(200).send({
-            message: 'GET request successfulll!!!!'
-          })
-        })
-        // POST endpoint
-        .post((req: Request, res: Response) => {
-          // Create new contact
-          res.status(200).send({
-            message: 'POST request successfulll!!!!'
-          })
-        })
+    app.route('/profesor/:profesorId')
+        .get(profesorController.getProfesorById)
+        .put(profesorController.updateProfesorById)
+        .delete(profesorController.deleteProfesorById);
 
-    // Contact detail
-    app.route('/contact/:contactId')
-    // get specific contact
-        .get((req: Request, res: Response) => {
-          // Get a single contact detail
-          res.status(200).send({
-            message: 'GET request successfulll!!!!'
-          })
-        })
-        .put((req: Request, res: Response) => {
-          // Update a contact
-          res.status(200).send({
-            message: 'PUT request successfulll!!!!'
-          })
-        })
-        .delete((req: Request, res: Response) => {
-          // Delete a contact
-          res.status(200).send({
-            message: 'DELETE request successfulll!!!!'
-          })
-        })
+    app.route('/curso').get(cursoController.getAlCursos)
+        .post(cursoController.createCurso);
+
+    app.route('/curso/:cursoId')
+        .get(cursoController.getCursoById)
+        .put(cursoController.updateCursoById)
+        .delete(cursoController.deleteCursoById);
   }
 }

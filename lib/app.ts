@@ -2,13 +2,12 @@ import * as mongoose from 'mongoose';
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import {Routes} from "./routes/routes";
-import {ProfesorRoutes} from "./resources/profesor/profesor.routes";
 
 class App {
 
   public app: express.Application;
-  // public router: Routes = new Routes();
-  public router: Routes = new ProfesorRoutes();
+  public router: Routes = new Routes();
+  // public router: Routes = new ProfesorRoutes();
   public mongoUrl: string = 'mongodb://localhost/wit';
 
   constructor() {

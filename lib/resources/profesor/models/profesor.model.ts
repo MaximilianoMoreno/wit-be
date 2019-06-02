@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 export const ProfesorSchema = new Schema({
@@ -19,7 +20,7 @@ export const ProfesorSchema = new Schema({
     type: String
   },
   legajo: {
-    type: String
+    type: Number
   },
   telefono: {
     type: String
@@ -32,3 +33,5 @@ export const ProfesorSchema = new Schema({
     default: true
   }
 });
+
+ProfesorSchema.plugin(AutoIncrement, {id:'order_seq',inc_field: 'legajo'});
